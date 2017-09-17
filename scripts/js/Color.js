@@ -19,19 +19,17 @@ oColor = function (name) {
 
     this.Init = function () {
         this.OnEnsure = function () {
-            eval(name).Get();
-            if (typeof (eval(name).OnGet) != 'undefined')
-                eval(name).OnGet();
-            eval(name).Hide();
+            $Invoke(name, 'Get');
+            $Invoke(name, 'OnGet');
+            $Invoke(name, 'Hide');
         }
         this.OnApply = function () {
-            eval(name).Get();
-            if (typeof (eval(name).OnGet) != 'undefined')
-                eval(name).OnGet();
+            $Invoke(name, 'Get');
+            $Invoke(name, 'OnGet');
             return true;
         }
         this.OnCancel = function () {
-            eval(name).Hide();
+            $Invoke(name, 'Hide');
         }
         this.Ensure = new oButton(name + '.Ensure', '确定', this.OnEnsure, true, true);
         this.Apply = new oButton(name + '.Apply', '应用', this.OnApply, true, true);
@@ -39,7 +37,7 @@ oColor = function (name) {
 
         this.OnRed = function (x, y) {
             _r = y;
-            eval(name).Get();
+            $Invoke(name, 'Get');
             eval(name).$.Repaint();
         }
         this.OnGreen = function (x, y) {
@@ -76,7 +74,7 @@ oColor = function (name) {
     this.Hide = function () {
         var client = {x: this.$.x, y: this.$.y, w: this.$.w, h: this.$.h};
         this.Animation.SSA(this.$, this.$.x + this.padding, this.$.y + this.padding, this.$.w - 2 * this.padding, this.$.h - 2 * this.padding, null, null, client, 4, OnHide = function () {
-            eval(name).SetVisible(false);
+            $Invoke(name, 'SetVisible', false);
             $RepaintRect(client.x, client.y, client.w, client.h);
         });
     }
