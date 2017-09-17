@@ -204,46 +204,46 @@ Setting.Choose = function (idx) {
     switch (title) {
         case '分组显示模式':
             w = ww;
-            h = 35;
+            h = $Z(35);
             var sources = ['垂直对齐', '水平对齐', '两边对齐'];
 
             for (var i = 0; i < sources.length; i++) {
                 items.push(new SelectListItem(i, sources[i], Browser.SetProperty));
-                items[i].Size(0, 40 + i * h, w, h);
+                items[i].Size(0, $Z(40) + i * h, w, h);
             }
             break;
 
         case '网络搜索源':
             w = ww;
-            h = 35;
+            h = $Z(35);
             var sources = ['网易云音乐(MP3(荐))', '天天动听(MP3|无损(快))', 'QQ 音乐(MP3)',
 		'虾米音乐(MP3)', '百度音乐(MP3|无损(快))', '酷我音乐(MP3|无损(慢))', '酷狗音乐(MP3|无损(慢))'];
 
             for (var i = 0; i < sources.length; i++) {
                 items.push(new SelectListItem(i, sources[i], Web.SetProperty));
-                items[i].Size(0, 40 + i * h, w, h);
+                items[i].Size(0, $Z(40) + i * h, w, h);
             }
             break;
 
         case '封面下载源':
             w = ww;
-            h = 35;
+            h = $Z(35);
             var sources = ['虾米', 'lastfm'];
 
             for (var i = 0; i < sources.length; i++) {
                 items.push(new SelectListItem(i, sources[i], Cover.SetProperty));
-                items[i].Size(0, 40 + i * h, w, h);
+                items[i].Size(0, $Z(40) + i * h, w, h);
             }
             break;
 
         case '壁纸':
             w = ww;
-            h = 100;
+            h = $Z(100);
             var sources = utils.Glob(PATH_WP + '*.*').toArray();
 
             for (var i = 0; i < sources.length; i++) {
                 items.push(new SelectTileItem(i, $GetFn(sources[i]), WpUpdate));
-                items[i].Size(0, 40 + i * h, w, h);
+                items[i].Size(0, $Z(40) + i * h, w, h);
             }
             Load = function () {
                 $Queue(0, Activity.items.length, func = function (i) {
@@ -317,11 +317,11 @@ SelectListItem = function (id, title, func) {
         if (this.id == Activity.select)
             gr.FillSolidRect(this.x + x, this.y + y, this.w, this.h, ThemeStyle.bgColor_hl);
         else
-            gr.DrawLine(this.x + x + 15, this.y + y + this.h - 1, this.x + x - 15 + this.w, this.y + y + this.h - 1, 1, $SetAlpha(ThemeStyle.fgColor, 32));
-        gr.GdiDrawText(this.title, ThemeStyle.font, ThemeStyle.fgColor, this.x + x + 50, this.y + y, this.w - 70, this.h, DT_LV);
+            gr.DrawLine(this.x + x + $Z(15), this.y + y + this.h - $Z(1), this.x + x - $Z(15) + this.w, this.y + y + this.h - $Z(1), $Z(1), $SetAlpha(ThemeStyle.fgColor, 32));
+        gr.GdiDrawText(this.title, ThemeStyle.font, ThemeStyle.fgColor, this.x + x + $Z(50), this.y + y, this.w - $Z(70), this.h, DT_LV);
 
         if (this.id == window.GetProperty(Activity.title))
-            Image.Draw(gr, g_check_icon, this.x + x + 10, this.y + y + 2, 0, Activity.$.alpha);
+            Image.Draw(gr, g_check_icon, this.x + x + $Z(10), this.y + y + 2, 0, Activity.$.alpha);
     }
 }
 
@@ -352,10 +352,10 @@ SelectTileItem = function (id, title, func) {
 
     this.Loaded = function (image) {
         if (Image.IsImage(image)) {
-            this.Img.$ = Image.Process(image, this.h - 20, this.h - 20, IMG_ADAPT, 2);
+            this.Img.$ = Image.Process(image, this.h - $Z(20), this.h - $Z(20), IMG_ADAPT, 2);
             Image.Clear(image);
 
-            var xy = Image.GetXY(this.Img.$, this.h - 20, this.h - 20, IMG_CENTER);
+            var xy = Image.GetXY(this.Img.$, this.h - $Z(20), this.h - $Z(20), IMG_CENTER);
             this.Img.x = xy[0];
             this.Img.y = xy[1];
         }
@@ -408,11 +408,11 @@ SelectTileItem = function (id, title, func) {
         if (this.id == Activity.select)
             gr.FillSolidRect(this.x + x, this.y + y, this.w, this.h, ThemeStyle.bgColor_hl);
         else
-            gr.DrawLine(this.x + x + 15, this.y + y + this.h - 1, this.x + x - 15 + this.w, this.y + y + this.h - 1, 1, $SetAlpha(ThemeStyle.fgColor, 32));
-        gr.GdiDrawText(this.title, ThemeStyle.font, ThemeStyle.fgColor, this.x + x + 120, this.y + y, this.w - 180, this.h, DT_LV);
+            gr.DrawLine(this.x + x + $Z(15), this.y + y + this.h - $Z(1), this.x + x - $Z(15) + this.w, this.y + y + this.h - $Z(1), $Z(1), $SetAlpha(ThemeStyle.fgColor, 32));
+        gr.GdiDrawText(this.title, ThemeStyle.font, ThemeStyle.fgColor, this.x + x + $Z(120), this.y + y, this.w - $Z(180), this.h, DT_LV);
 
-        Image.Draw(gr, this.Img.$, this.x + x + 10 + this.Img.x, this.y + y + 10 + this.Img.y, 0, Activity.$.alpha);
+        Image.Draw(gr, this.Img.$, this.x + x + $Z(10) + this.Img.x, this.y + y + $Z(10) + this.Img.y, 0, Activity.$.alpha);
         if (this.title == window.GetProperty(Activity.title))
-            Image.Draw(gr, g_check_icon, this.x + x + this.w - 50, this.y + y + 35, 0, Activity.$.alpha);
+            Image.Draw(gr, g_check_icon, this.x + x + this.w - $Z(50), this.y + y + $Z(35), 0, Activity.$.alpha);
     }
 }

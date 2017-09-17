@@ -177,7 +177,7 @@ oGroup = function (name) {
 
     this.Init = function () {
         this.OnBack = function () {
-            eval(name).Close();
+            $Invoke(name, 'Close');
             return true;
         }
         this.Back = new oSimpleButton(name + '.Back', this.OnBack, SHAPE_SOLID);
@@ -246,9 +246,9 @@ oGroup = function (name) {
     }
 
     this.OnOpen = function () {
-        eval(name).SetVisible(true);
+        $Invoke(name, 'SetVisible', true);
         Panel.Mouse(ON_MOUSE_MOVE, Mouse.x, Mouse.y);
-        eval(name).Load();
+        $Invoke(name, 'Load');
     }
 
     this.Open = function (src) {
@@ -283,8 +283,8 @@ oGroup = function (name) {
     }
 
     this.OnClose = function () {
-        eval(name).SetVisible(false);
-        eval(name).Dispose();
+        $Invoke(name, 'SetVisible', false);
+        $Invoke(name, 'Dispose');
     }
 
     this.Close = function () {

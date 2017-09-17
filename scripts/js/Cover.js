@@ -86,9 +86,7 @@ oCover = function (name) {
         eval(name).Img = null;
         eval(name).Img = eval(name).Image;
         eval(name).Image = null;
-        if (typeof (eval(name).OnUpdate) != 'undefined') {
-            eval(name).OnUpdate();
-        }
+        $Invoke(name, 'OnUpdate');
     }
 
     this.Update = function (animation) {
@@ -105,9 +103,7 @@ oCover = function (name) {
             this.Img = new oImg(this.Cache, this.$.w, this.$.h, this.aspect, 0, 255, 2, IMG_CENTER, this.option);
 
             this.$.Repaint();
-            if (typeof (eval(name).OnUpdate) != 'undefined') {
-                eval(name).OnUpdate();
-            }
+            $Invoke(name, 'OnUpdate');
         }
         else if (animation != ANIMATION_ALPHA) {
             this.Image = new oImg(this.Cache, this.$.w, this.$.h, this.aspect, 0, 0, 2, IMG_CENTER, this.option);
