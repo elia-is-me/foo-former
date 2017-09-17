@@ -58,7 +58,7 @@ oActivity = function (name) {
     this.$.alpha = 0;
     this.select = -1;
     this.tile = '';
-    this.TopHeight = 40;
+    this.TopHeight = $Z(40);
     this.items = [];
 
     this.Animation = new oAnimation(name + '.Animation');
@@ -81,8 +81,9 @@ oActivity = function (name) {
             return true;
         }
         this.Back = new oSimpleButton(name + '.Back', this.OnBack, SHAPE_SOLID);
+        var fontAwe = gdi.Font('Fontawesome', $Z(15));
         this.Back.Paint = function (gr) {
-            gr.GdiDrawText($Font2Icon('61700') + '  返回', gdi.Font('Fontawesome', 15), 0xffffffff, this.$.x, this.$.y, this.$.w, this.$.h, DT_CV);
+            gr.GdiDrawText($Font2Icon('61700') + '  返回', fontAwe, 0xffffffff, this.$.x, this.$.y, this.$.w, this.$.h, DT_CV);
         }
     }
     this.Init();

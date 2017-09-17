@@ -18,9 +18,9 @@ oPlayQueueItem = function (id, metadb) {
         if (this.selected)
             gr.FillSolidRect(x, y, w, h, ThemeStyle.bgColor_hl);
 
-        gr.GdiDrawText(this.id + 1, ThemeStyle.font, ThemeStyle.fgColor, x + 5, y, 50, h, DT_CV);
-        gr.GdiDrawText(Metadb.TitleFormat("$if( %length%, %length%, '--:--' )", this.metadb), ThemeStyle.font, ThemeStyle.fgColor, x + w - 90, y, 80, h, DT_RV);
-        gr.GdiDrawText(Metadb.TitleFormat('%title%', this.metadb), ThemeStyle.font, ThemeStyle.fgColor, x + 60, y, w - 160, h, DT_LV);
+        gr.GdiDrawText(this.id + 1, ThemeStyle.font, ThemeStyle.fgColor, x + $Z(5), y, $Z(50), h, DT_CV);
+        gr.GdiDrawText(Metadb.TitleFormat("$if( %length%, %length%, '--:--' )", this.metadb), ThemeStyle.font, ThemeStyle.fgColor, x + w - $Z(90), y, $Z(80), h, DT_RV);
+        gr.GdiDrawText(Metadb.TitleFormat('%title%', this.metadb), ThemeStyle.font, ThemeStyle.fgColor, x + $Z(60), y, w - $Z(160), h, DT_LV);
     }
 }
 
@@ -33,7 +33,7 @@ oPlayQueueClearButton = function (id) {
 
     this.Paint = function (gr, x, y, w, h) {
         gr.FillSolidRect(x, y, w, h, ThemeStyle.bgColor);
-        gr.DrawLine(x + 15, y, x + w - 15, y, 1, $SetAlpha(ThemeStyle.fgColor, 32));
+        gr.DrawLine(x + $Z(15), y, x + w - $Z(15), y, $Z(1), $SetAlpha(ThemeStyle.fgColor, 32));
         if (this.id == PlayQueue.active)
             gr.FillSolidRect(x, y, w, h, $SetAlpha(ThemeStyle.fgColor, 32));
 
@@ -41,7 +41,7 @@ oPlayQueueClearButton = function (id) {
     }
 }
 
-var PlayQueue = new oListView('PlayQueue', 35, ENABLE_NONE);
+var PlayQueue = new oListView('PlayQueue', $Z(35), ENABLE_NONE);
 PlayQueue.title = '播放队列';
 PlayQueue.active = -1;
 
@@ -57,11 +57,13 @@ PlayQueue.Back = new oSimpleButton('PlayQueue.Back', PlayQueue.OnBack, SHAPE_SOL
 
 PlayQueue.Back.OnPrevPaint = function (gr) {
     gr.FillSolidRect(this.$.x, this.$.y, this.$.w, this.$.h, $SetAlpha(ThemeStyle.bgColor, 255));
-    gr.DrawLine(this.$.x, this.$.y + this.$.h - 1, this.$.x + this.$.w - 1, this.$.y + this.$.h - 1, 1, $SetAlpha(ThemeStyle.fgColor_l, 128));
+    gr.DrawLine(this.$.x, this.$.y + this.$.h - $Z(1), this.$.x + this.$.w - $Z(1), this.$.y + this.$.h - $Z(1), $Z(1), $SetAlpha(ThemeStyle.fgColor_l, 128));
 }
 
+var fontAwesome = gdi.Font('FontAwesome', $Z(12));
+
 PlayQueue.Back.Paint = function (gr) {
-    gr.GdiDrawText($Font2Icon('61703') + '   返回', gdi.Font('Fontawesome', 12), ThemeStyle.fgColor, this.$.x, this.$.y, this.$.w, this.$.h, DT_CV);
+    gr.GdiDrawText($Font2Icon('61703') + '   返回', fontAwesome, ThemeStyle.fgColor, this.$.x, this.$.y, this.$.w, this.$.h, DT_CV);
 }
 
 // override
@@ -152,7 +154,7 @@ PlayQueue.OnVisible = function (vis) {
 
 PlayQueue.Open = function () {
     this.SetVisible(true);
-    this.Animation.SSA(this.$, null, Main.$.y + Main.$.h - 250, null, null, null, null, true, 4);
+    this.Animation.SSA(this.$, null, Main.$.y + Main.$.h - $Z(250), null, null, null, null, true, 4);
 }
 
 PlayQueue.OnClose = function () {

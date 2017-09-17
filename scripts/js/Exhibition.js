@@ -133,30 +133,30 @@
     }
 
     this.OnSize = function (resize) {
-        table_w = Math.floor(Math.min(this.$.w - 100, this.$.h - 325));
+        table_w = Math.floor(Math.min(this.$.w - $Z(100), this.$.h - $Z(325)));
         table_x = this.$.x + Math.floor((this.$.w - table_w) / 2);
-        Cover.$.Size(table_x, this.$.y + 90, table_w, table_w);
-        Lyric.$.Size(table_x, this.$.y + 90, table_w, table_w);
-        Biography.$.Size(table_x, this.$.y + 90, table_w, table_w);
+        Cover.$.Size(table_x, this.$.y + $Z(90), table_w, table_w);
+        Lyric.$.Size(table_x, this.$.y + $Z(90), table_w, table_w);
+        Biography.$.Size(table_x, this.$.y + $Z(90), table_w, table_w);
 
         if (resize) {
             Image.Clear(this.bg);
             this.GetBackImage();
         }
 
-        this.Prev.$.Size(Math.floor(this.$.x + this.$.w / 2 - 150), this.$.y + this.$.h - 125, 50, 50, this.$.z + 1);
-        this.PlayOrPause.$.Size(Math.floor(this.$.x + this.$.w / 2 - 25), this.$.y + this.$.h - 125, 50, 50, this.$.z + 1);
-        this.Next.$.Size(Math.floor(this.$.x + this.$.w / 2 + 100), this.$.y + this.$.h - 125, 50, 50, this.$.z + 1);
-        this.Back.$.Size(this.$.x + 10, this.$.y + 7, 50, 50, this.$.z + 1);
-        this.Track.$.Size(this.$.x + this.$.w - 60, this.$.y + 7, 50, 50, this.$.z + 1);
+        this.Prev.$.Size(Math.floor(this.$.x + this.$.w / 2 - $Z(150)), this.$.y + this.$.h - $Z(125), $Z(50), $Z(50), this.$.z + 1);
+        this.PlayOrPause.$.Size(Math.floor(this.$.x + this.$.w / 2 - $Z(25)), this.$.y + this.$.h - $Z(125), $Z(50), $Z(50), this.$.z + 1);
+        this.Next.$.Size(Math.floor(this.$.x + this.$.w / 2 + $Z(100)), this.$.y + this.$.h - $Z(125), $Z(50), $Z(50), this.$.z + 1);
+        this.Back.$.Size(this.$.x + $Z(10), this.$.y + $Z(7), $Z(50), $Z(50), this.$.z + 1);
+        this.Track.$.Size(this.$.x + this.$.w - $Z(60), this.$.y + $Z(7), $Z(50), $Z(50), this.$.z + 1);
 
-        this.Seek.$.Size(this.$.x + 40, this.$.y + this.$.h - 55, this.$.w - 80, 20, this.$.z + 1);
+        this.Seek.$.Size(this.$.x + $Z(40), this.$.y + this.$.h - $Z(55), this.$.w - $Z(80), $Z(20), this.$.z + 1);
         if (fb.IsPlaying || fb.IsPaused)
             this.Seek.x = Math.floor(Progress.Value() * this.Seek.w);
-        this.Volume.$.Size(this.$.x + 90, this.$.y + 21, this.$.w - 180, 20, this.$.z + 1);
+        this.Volume.$.Size(this.$.x + $Z(90), this.$.y + $Z(21), this.$.w - $Z(180), $Z(20), this.$.z + 1);
         this.Volume.x = Math.floor(Volume.Value() * this.Volume.w);
 
-        this.Table.$.Size(this.$.x + 100, this.$.y + 40, this.$.w - 200, 30, this.$.z + 1);
+        this.Table.$.Size(this.$.x + $Z(100), this.$.y + $Z(40), this.$.w - $Z(200), $Z(30), this.$.z + 1);
     }
 
     this.Update = function () {
@@ -215,13 +215,13 @@
             TableShow(g_table, true);
             var y = Main.$.y;
             this.$.y = y - this.$.h;
-            Rating.$.x = this.$.x + Math.floor(this.$.w / 2 - 47);
-            var objArr = [[Rating.$, null, y + this.$.h - 160], [this.$, null, y]];
+            Rating.$.x = this.$.x + Math.floor(this.$.w / 2 - $Z(47));
+            var objArr = [[Rating.$, null, y + this.$.h - $Z(160)], [this.$, null, y]];
             this.Animation.SSAV2(objArr, true, 3, SetVisible);
         }
         else {
             TabShow(g_tab, true);
-            var objArr = [[Rating.$, Top.$.x + Top.$.w - 110, Top.$.y + 7], [this.$, null, Main.$.y - this.$.h]];
+            var objArr = [[Rating.$, Top.$.x + Top.$.w - $Z(110), Top.$.y + $Z(7)], [this.$, null, Main.$.y - this.$.h]];
             this.Animation.SSAV2(objArr, true, 3, SetVisible);
         }
         g_exhibit = ex;
@@ -230,7 +230,7 @@
 
     this.OnMove = function (x, y) {
         this.$.x = x.Limit(Main.$.x - this.$.w + Info.$.x, Main.$.x);
-        Rating.$.x = this.$.x + Math.floor(this.$.w / 2 - 47);
+        Rating.$.x = this.$.x + Math.floor(this.$.w / 2 - $Z(47));
         if (!Info.$.visible) {
             Info.SetVisible(true);
         }
@@ -272,21 +272,23 @@
         }
     }
 
+    var fontAwesome = gdi.Font('FontAwesome', $Z(20));
+
     this.OnPaint = function (gr) {
         gr.FillSolidRect(this.$.x, this.$.y, this.$.w, this.$.h, $SetAlpha(ThemeStyle.bgColor, 255));
         this.bg && Image.Draw(gr, this.bg, this.$.x, this.$.y, 0, this.alpha);
         this.Temp.image && Image.Draw(gr, this.Temp.image, this.$.x, this.$.y, 0, this.Temp.alpha);
 
-        gr.GdiDrawText(Top.Title.str, ThemeStyle.hugeFont, ThemeStyle.fgColor, this.$.x + 25, this.$.y + this.$.h - 220, this.$.w - 50, 30, DT_CV);
-        gr.GdiDrawText(Top.Artist.str, ThemeStyle.font, ThemeStyle.fgColor, this.$.x + 50, this.$.y + this.$.h - 185, this.$.w - 100, 20, DT_CV);
+        gr.GdiDrawText(Top.Title.str, ThemeStyle.hugeFont, ThemeStyle.fgColor, this.$.x + $Z(25), this.$.y + this.$.h - $Z(220), this.$.w - $Z(50), $Z(30), DT_CV);
+        gr.GdiDrawText(Top.Artist.str, ThemeStyle.font, ThemeStyle.fgColor, this.$.x + $Z(50), this.$.y + this.$.h - $Z(185), this.$.w - $Z(100), $Z(20), DT_CV);
 
         if (fb.IsPlaying) {
-            gr.GdiDrawText(Metadb.TitleFormat("$if( %length%, [%playback_time%], '--:--' )"), ThemeStyle.font, ThemeStyle.fgColor, this.$.x + 50, this.$.y + this.$.h - 75, 50, 20, DT_LV);
-            gr.GdiDrawText(Metadb.TitleFormat("$if( %length%, %length%, '--:--' )"), ThemeStyle.font, ThemeStyle.fgColor, this.$.x + this.$.w - 100, this.$.y + this.$.h - 75, 50, 20, DT_RV);
+            gr.GdiDrawText(Metadb.TitleFormat("$if( %length%, [%playback_time%], '--:--' )"), ThemeStyle.font, ThemeStyle.fgColor, this.$.x + $Z(50), this.$.y + this.$.h - $Z(75), $Z(50), $Z(20), DT_LV);
+            gr.GdiDrawText(Metadb.TitleFormat("$if( %length%, %length%, '--:--' )"), ThemeStyle.font, ThemeStyle.fgColor, this.$.x + this.$.w - $Z(100), this.$.y + this.$.h - $Z(75), $Z(50), $Z(20), DT_RV);
         }
 
-        gr.GdiDrawText($Font2Icon('61478'), gdi.Font('FontAwesome', 20), ThemeStyle.fgColor, this.Volume.$.x - 20, this.$.y + 20, 25, 25, DT_CVN);
-        gr.GdiDrawText($Font2Icon('61480'), gdi.Font('FontAwesome', 20), ThemeStyle.fgColor, this.Volume.$.x + this.Volume.$.w, this.$.y + 20, 25, 25, DT_CVN);
+        gr.GdiDrawText($Font2Icon('61478'), fontAwesome, ThemeStyle.fgColor, this.Volume.$.x - $Z(20), this.$.y + $Z(20), $Z(25), $Z(25), DT_CVN);
+        gr.GdiDrawText($Font2Icon('61480'), fontAwesome, ThemeStyle.fgColor, this.Volume.$.x + this.Volume.$.w, this.$.y + $Z(20), $Z(25), $Z(25), DT_CVN);
     }
 }
 

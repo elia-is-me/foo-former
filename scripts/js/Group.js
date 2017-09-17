@@ -43,8 +43,8 @@
         if (rate < 0) return;
         var x = xx - Group.$.x;
         var y = yy + Group.$.offsetY - Group.$.y;
-        if (x > this.x + this.w - 115 && x < this.x + this.w - 15 && y > this.y + this.h - 30 && y < this.y + this.h - 5) {
-            var i = Math.ceil((x - (this.x + this.w - 115)) / 20);
+        if (x > this.x + this.w - $Z(115) && x < this.x + this.w - $Z(15) && y > this.y + this.h - $Z(30) && y < this.y + this.h - $Z(5)) {
+            var i = Math.ceil((x - (this.x + this.w - $Z(115))) / 20);
             if (i != rate);
             {
                 rate = i;
@@ -125,16 +125,16 @@
             gr.FillSolidRect(this.x - x, this.y - y, this.w, this.h, ThemeStyle.bgColor_hl);
 
         var color = this.metadb.Compare(fb.GetNowPlaying()) ? ThemeStyle.fgColor_hl : ThemeStyle.bgColor;
-        gr.GdiDrawText(this.title, ThemeStyle.bigFont, color, this.x - x + 15, this.y - y + 10, this.w - 30, 25, DT_LV);
-        gr.GdiDrawText(this.artist, ThemeStyle.font, color, this.x - x + 15, this.y - y + 40, this.w - 30, 25, DT_LV);
-        gr.GdiDrawText(this.info, ThemeStyle.font, color, this.x - x + 15, this.y - y + 70, rate == -1 ? this.w - 30 : this.w - 150, 25, DT_LV);
+        gr.GdiDrawText(this.title, ThemeStyle.bigFont, color, this.x - x + $Z(15), this.y - y + $Z(10), this.w - $Z(30), $Z(25), DT_LV);
+        gr.GdiDrawText(this.artist, ThemeStyle.font, color, this.x - x + $Z(15), this.y - y + $Z(40), this.w - $Z(30), $Z(25), DT_LV);
+        gr.GdiDrawText(this.info, ThemeStyle.font, color, this.x - x + $Z(15), this.y - y + $Z(70), rate == -1 ? this.w - $Z(30) : this.w - $Z(150), $Z(25), DT_LV);
 
         if (rate < 0) return;
         for (var i = 0; i < 5; i++) {
             if (i < rate)
-                gr.GdiDrawText(Group.Rate.solid, Group.Rate.font, color, this.x - x + this.w - 115 + i * 20, this.y - y + 70, 20, 25, DT_LV);
+                gr.GdiDrawText(Group.Rate.solid, Group.Rate.font, color, this.x - x + this.w - $Z(115 + i * 20), this.y - y + $Z(70), $Z(20), $Z(25), DT_LV);
             else
-                gr.GdiDrawText(Group.Rate.empty, Group.Rate.font, color, this.x - x + this.w - 115 + i * 20, this.y - y + 70, 20, 25, DT_LV);
+                gr.GdiDrawText(Group.Rate.empty, Group.Rate.font, color, this.x - x + this.w - $Z(115 + i * 20), this.y - y + $Z(70), $Z(20), $Z(25), DT_LV);
         }
     }
 }
@@ -146,16 +146,16 @@ oGroup = function (name) {
     this.$.totalY = 0;
 
     this.bg = null;
-    this.font = gdi.Font('Brush Script Std', 35, 1);
-    this.Rate = { solid: $Font2Icon("61445"), empty: $Font2Icon("61446"), font: gdi.Font('Fontawesome', 15) };
+    this.font = gdi.Font('Brush Script Std', $Z(35), 1);
+    this.Rate = { solid: $Font2Icon("61445"), empty: $Font2Icon("61446"), font: gdi.Font('Fontawesome', $Z(15)) };
     this.Img = { src: null, $: null };
     this.image = null;
     this.Animation = new oAnimation(name + '.Animation');
     this.vScroll = new oScrollBar(name + '.vScroll', this.$, true, false, false);
     this.items = [];
     this.list = null;
-    this.rowHeight = 100;
-    this.margin = 10;
+    this.rowHeight = $Z(100);
+    this.margin = $Z(10);
     this.visible = false;
     this.select = -1;
     this.state = 0;
@@ -181,8 +181,9 @@ oGroup = function (name) {
             return true;
         }
         this.Back = new oSimpleButton(name + '.Back', this.OnBack, SHAPE_SOLID);
+        var fontAwesome = gdi.Font('Fontawesome', $Z(15));
         this.Back.Paint = function (gr) {
-            gr.GdiDrawText($Font2Icon('61700') + '  返回', gdi.Font('Fontawesome', 15), 0xffffffff, this.$.x, this.$.y, this.$.w, this.$.h, DT_CV);
+            gr.GdiDrawText($Font2Icon('61700') + '  返回', fontAwesome, 0xffffffff, this.$.x, this.$.y, this.$.w, this.$.h, DT_CV);
         }
 
         this.OnPlay = function () {
@@ -192,7 +193,7 @@ oGroup = function (name) {
         }
         this.Play = new oSimpleButton(name + '.Play', this.OnPlay, SHAPE_SOLID);
         this.Play.Paint = function (gr) {
-            gr.GdiDrawText($Font2Icon('61676'), gdi.Font('Fontawesome', 15), 0xffffffff, this.$.x, this.$.y, this.$.w, this.$.h, DT_CV);
+            gr.GdiDrawText($Font2Icon('61676'), fontAwesome, 0xffffffff, this.$.x, this.$.y, this.$.w, this.$.h, DT_CV);
         }
     }
     this.Init();
@@ -206,7 +207,7 @@ oGroup = function (name) {
         if (date.length == 0) return;
         date = date.substring(0, Math.min(date.length, 10));
 
-        this.image = gdi.CreateImage(200, 50);
+        this.image = gdi.CreateImage($Z(200), $Z(50));
         var g = this.image.GetGraphics();
         g.SetTextRenderingHint(4);
         g.SetSmoothingMode(4);
@@ -303,8 +304,8 @@ oGroup = function (name) {
 
     this.OnSize = function () {
         this.vScroll.$.Size(this.$.x + this.$.w - 5, this.$.y + 150, 5, this.$.h - 150, this.$.z + 1);
-        this.Back.$.Size(this.$.x, this.$.y, 80, 40, this.$.z + 1);
-        this.Play.$.Size(this.$.x + this.$.w - 50, this.$.y, 50, 40, this.$.z + 1);
+        this.Back.$.Size(this.$.x, this.$.y, $Z(80), $Z(40), this.$.z + 1);
+        this.Play.$.Size(this.$.x + this.$.w - $Z(50), this.$.y, $Z(50), $Z(40), this.$.z + 1);
     }
 
     this.Show = function (idx) {
@@ -350,7 +351,7 @@ oGroup = function (name) {
     }
 
     this.OnMouse = function (event, x, y) {
-        if (event == ON_MOUSE_LBTN_DBLCK && y < this.$.y + 40) {
+        if (event == ON_MOUSE_LBTN_DBLCK && y < this.$.y + $Z(40)) {
             if (fb.IsPlaying) {
                 if (plman.ActivePlaylist == plman.PlayingPlaylist) {
                     var nowplaying = this.list.Find(fb.GetNowPlaying());
@@ -391,15 +392,15 @@ oGroup = function (name) {
         }
 
         var imgY = this.$.y - Math.floor(this.$.offsetY / 10);
-        if (imgY + this.Img.$.Height < 150)
-            imgY = 150 - this.Img.$.Height;
+        if (imgY + this.Img.$.Height < $Z(150))
+            imgY = $Z(150) - this.Img.$.Height;
         Image.Draw(gr, this.Img.$, this.$.x, imgY, 0, 255);
         gr.SetSmoothingMode(4);
-        Image.Draw(gr, this.image, this.$.x + this.$.w - 220, imgY + this.Img.$.Height, 30, 255);
+        Image.Draw(gr, this.image, this.$.x + this.$.w - $Z(220), imgY + this.Img.$.Height, 30, 255);
         gr.SetSmoothingMode(0);
 
-        gr.FillSolidRect(this.$.x, this.$.y, this.$.w, 40, $SetAlpha($SetAlpha(ThemeStyle.bgColor_hl, 255), 128));
-        gr.GdiDrawText(this.title, ThemeStyle.bigFont, 0xffffffff, this.$.x + 100, this.$.y, this.$.w - 200, 40, DT_CV);
+        gr.FillSolidRect(this.$.x, this.$.y, this.$.w, $Z(40), $SetAlpha($SetAlpha(ThemeStyle.bgColor_hl, 255), 128));
+        gr.GdiDrawText(this.title, ThemeStyle.bigFont, 0xffffffff, this.$.x + $Z(100), this.$.y, this.$.w - $Z(200), $Z(40), DT_CV);
     }
 }
 

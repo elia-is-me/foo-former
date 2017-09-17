@@ -110,20 +110,23 @@
             fb.ShowPreferences();
         }
 
-        this.items.push(new oTextButton(name + '.items[0]', $Font2Icon('61902'), gdi.Font('FontAwesome', 30), this.Item0, ThemeStyle, false, false));
-        this.items.push(new oTextButton(name + '.items[1]', $Font2Icon('61602'), gdi.Font('FontAwesome', 30), this.Item1, ThemeStyle, false, false));
-        this.items.push(new oTextButton(name + '.items[2]', $Font2Icon('61744'), gdi.Font('FontAwesome', 30), this.Item2, ThemeStyle, false, false));
-        this.items.push(new oTextButton(name + '.items[3]', $Font2Icon('61918'), gdi.Font('FontAwesome', 30), this.Item3, ThemeStyle, false, false));
-        this.items.push(new oTextButton(name + '.items[4]', $Font2Icon('61728'), gdi.Font('FontAwesome', 30), this.Item4, ThemeStyle, false, false));
-        this.items.push(new oTextButton(name + '.items[5]', $Font2Icon('61792'), gdi.Font('FontAwesome', 25), this.Item5, ThemeStyle, false, false));
-        this.items.push(new oTextButton(name + '.items[6]', $Font2Icon('61954'), gdi.Font('FontAwesome', 30), this.Item6, ThemeStyle, false, false));
+        var fontAwesome30 = gdi.Font('FontAwesome', $Z(30));
+        var fontAwesome25 = gdi.Font('FontAwesome', $Z(25));
 
-        this.items.push(new oTextButton(name + '.items[7]', $Font2Icon('61514'), gdi.Font('FontAwesome', 25), this.Item7, ThemeStyle, false, false));
-        this.items.push(new oTextButton(name + '.items[8]', $Font2Icon('61515'), gdi.Font('FontAwesome', 25), this.Item8, ThemeStyle, false, false));
-        this.items.push(new oTextButton(name + '.items[9]', $Font2Icon('61517'), gdi.Font('FontAwesome', 25), this.Item9, ThemeStyle, false, false));
-        this.items.push(new oTextButton(name + '.items[10]', $Font2Icon('61518'), gdi.Font('FontAwesome', 25), this.Item10, ThemeStyle, false, false));
-        this.items.push(new oTextButton(name + '.items[11]', $Font2Icon('61461'), gdi.Font('FontAwesome', 30), this.Item11, ThemeStyle, false, false));
-        this.items.push(new oTextButton(name + '.items[12]', $Font2Icon('61459'), gdi.Font('FontAwesome', 30), this.Item12, ThemeStyle, false, false));
+        this.items.push(new oTextButton(name + '.items[0]', $Font2Icon('61902'), fontAwesome30, this.Item0, ThemeStyle, false, false));
+        this.items.push(new oTextButton(name + '.items[1]', $Font2Icon('61602'), fontAwesome30, this.Item1, ThemeStyle, false, false));
+        this.items.push(new oTextButton(name + '.items[2]', $Font2Icon('61744'), fontAwesome30, this.Item2, ThemeStyle, false, false));
+        this.items.push(new oTextButton(name + '.items[3]', $Font2Icon('61918'), fontAwesome30, this.Item3, ThemeStyle, false, false));
+        this.items.push(new oTextButton(name + '.items[4]', $Font2Icon('61728'), fontAwesome30, this.Item4, ThemeStyle, false, false));
+        this.items.push(new oTextButton(name + '.items[5]', $Font2Icon('61792'), fontAwesome25, this.Item5, ThemeStyle, false, false));
+        this.items.push(new oTextButton(name + '.items[6]', $Font2Icon('61954'), fontAwesome30, this.Item6, ThemeStyle, false, false));
+
+        this.items.push(new oTextButton(name + '.items[7]', $Font2Icon('61514'), fontAwesome25, this.Item7, ThemeStyle, false, false));
+        this.items.push(new oTextButton(name + '.items[8]', $Font2Icon('61515'), fontAwesome25, this.Item8, ThemeStyle, false, false));
+        this.items.push(new oTextButton(name + '.items[9]', $Font2Icon('61517'), fontAwesome25, this.Item9, ThemeStyle, false, false));
+        this.items.push(new oTextButton(name + '.items[10]', $Font2Icon('61518'), fontAwesome25, this.Item10, ThemeStyle, false, false));
+        this.items.push(new oTextButton(name + '.items[11]', $Font2Icon('61461'), fontAwesome30, this.Item11, ThemeStyle, false, false));
+        this.items.push(new oTextButton(name + '.items[12]', $Font2Icon('61459'), fontAwesome30, this.Item12, ThemeStyle, false, false));
 
         for (var i = 0; i < this.items.length; i++) {
             this.items[i].Defocus = function () { eval(name).Defocus(); }
@@ -248,7 +251,7 @@
         for (var i = 0; i < this.items.length; i++) {
             this.items[i].$.visible = false;
         }
-        this.Animation.SSA(this.$, window.GetProperty('主按钮左'), window.GetProperty('主按钮上'), 50, 50, null, null, 
+        this.Animation.SSA(this.$, window.GetProperty('主按钮左'), window.GetProperty('主按钮上'), $Z(50), $Z(50), null, null, 
             { x: xy[0], y: xy[1], w: 200, h: 180 }, 8, typeof (OnHide) == 'function' ? OnHide : this.OnHide);
     }
 

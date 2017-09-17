@@ -280,7 +280,7 @@ function on_playback_order_changed(new_index) {
     if (g_unsized) return;
 
     Image.Clear(g_pbo_icon);
-    Top.Pbo.image = g_pbo_icon = gdi.Image(PATH_ICO + 'Pbo\\' + new_index + '.png');
+    Top.Pbo.image = g_pbo_icon = $ZImage(gdi.Image(PATH_ICO + 'Pbo\\' + new_index + '.png'));
     Top.Pbo.$.Repaint();
 }
 

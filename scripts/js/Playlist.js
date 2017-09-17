@@ -20,21 +20,21 @@ oPlaylistItem = function (id, metadb) {
         if (this.id == Playlist.playing && fb.IsPlaying) {
             color = ThemeStyle.fgColor_hl;
             if (Playlist.isp)
-                Image.Draw(gr, g_isp1_icon, x + 23, Math.floor(y + (h - g_isp1_icon.Height) / 2), 0, 255);
+                Image.Draw(gr, g_isp1_icon, x + $Z(23), Math.floor(y + (h - g_isp1_icon.Height) / 2), 0, 255);
             else
-                Image.Draw(gr, g_isp2_icon, x + 23, Math.floor(y + (h - g_isp2_icon.Height) / 2), 0, 255);
-            gr.GdiDrawText(Metadb.TitleFormat("$if( %length%, [%playback_time% / ]%length%, '--:--' )"), ThemeStyle.font, color, x + w - 110, y, 100, h, DT_RV);
+                Image.Draw(gr, g_isp2_icon, x + $Z(23), Math.floor(y + (h - g_isp2_icon.Height) / 2), 0, 255);
+            gr.GdiDrawText(Metadb.TitleFormat("$if( %length%, [%playback_time% / ]%length%, '--:--' )"), ThemeStyle.font, color, x + w - $Z(110), y, $Z(100), h, DT_RV);
         }
         else {
             color = ThemeStyle.fgColor;
-            gr.GdiDrawText(this.id + 1, ThemeStyle.font, color, x + 5, y, 50, h, DT_CV);
-            gr.GdiDrawText(Metadb.TitleFormat("$if( %length%, %length%, '--:--' )", this.metadb), ThemeStyle.font, color, x + w - 110, y, 100, h, DT_RV);
+            gr.GdiDrawText(this.id + 1, ThemeStyle.font, color, x + $Z(5), y, $Z(50), h, DT_CV);
+            gr.GdiDrawText(Metadb.TitleFormat("$if( %length%, %length%, '--:--' )", this.metadb), ThemeStyle.font, color, x + w - $Z(110), y, $Z(100), h, DT_RV);
         }
-        gr.GdiDrawText(Metadb.TitleFormat('%title%', this.metadb), ThemeStyle.font, color, x + 60, y, w - 180, h, DT_LV);
+        gr.GdiDrawText(Metadb.TitleFormat('%title%', this.metadb), ThemeStyle.font, color, x + $Z(60), y, w - $Z(180), h, DT_LV);
     }
 }
 
-var Playlist = new oListView('Playlist', 35, ENABLE_SELECT);
+var Playlist = new oListView('Playlist', $Z(35), ENABLE_SELECT);
 Playlist.title = '单曲';
 
 Playlist.OnTime = function () {

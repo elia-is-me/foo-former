@@ -177,8 +177,8 @@ oBrowserItem = function (parentName, id, idx, metadb) {
             }
         }
         profiler = null;
-        this.w = this.Img.$.Width + 10;
-        this.h = this.Img.$.Height + 50;
+        this.w = this.Img.$.Width + $Z(10);
+        this.h = this.Img.$.Height + $Z(50);
 
         // 转行
         if (this.col > this.parent.col) {
@@ -247,15 +247,15 @@ oBrowserItem = function (parentName, id, idx, metadb) {
         if (this.parent.select == this.id)
             gr.FillSolidRect(this.x - x, this.y - y, this.w, this.h, ThemeStyle.bgColor_hl);
 
-        Image.Draw(gr, this.Img.$, this.x - x + 5, this.y - y + 5, 0, 255);
+        Image.Draw(gr, this.Img.$, this.x - x + $Z(5), this.y - y + $Z(5), 0, 255);
         if (this.parent.key) {
-            gr.GdiDrawText(Metadb.TitleFormat('[%artist%]', this.metadb), ThemeStyle.font, ThemeStyle.fgColor, this.x + 10 - x, this.y - y + this.h - 40, this.w - 20, 20, DT_LV);
+            gr.GdiDrawText(Metadb.TitleFormat('[%artist%]', this.metadb), ThemeStyle.font, ThemeStyle.fgColor, this.x + $Z(10) - x, this.y - y + this.h - $Z(40), this.w - $Z(20), $Z(20), DT_LV);
         }
         else {
-            gr.GdiDrawText(Metadb.TitleFormat('[%album%]', this.metadb), ThemeStyle.font, ThemeStyle.fgColor, this.x + 10 - x, this.y - y + this.h - 40, this.w - 20, 20, DT_LV);
-            gr.GdiDrawText(Metadb.TitleFormat('[%album artist%]', this.metadb), ThemeStyle.smallFont, ThemeStyle.fgColor_l, this.x + 10 - x, this.y - y + this.h - 20, this.w - 50, 20, DT_LV);
+            gr.GdiDrawText(Metadb.TitleFormat('[%album%]', this.metadb), ThemeStyle.font, ThemeStyle.fgColor, this.x + $Z(10) - x, this.y - y + this.h - $Z(40), this.w - $Z(20), $Z(20), DT_LV);
+            gr.GdiDrawText(Metadb.TitleFormat('[%album artist%]', this.metadb), ThemeStyle.smallFont, ThemeStyle.fgColor_l, this.x + $Z(10) - x, this.y - y + this.h - $Z(20), this.w - $Z(50), $Z(20), DT_LV);
         }
-        gr.GdiDrawText(this.num + '首', ThemeStyle.smallFont, ThemeStyle.fgColor_l, this.x - x + this.w - 45, this.y - y + this.h - 20, 40, 20, DT_RV);
+        gr.GdiDrawText(this.num + '首', ThemeStyle.smallFont, ThemeStyle.fgColor_l, this.x - x + this.w - $Z(45), this.y - y + this.h - $Z(20), $Z(40), $Z(20), DT_RV);
     }
 }
 
@@ -268,6 +268,7 @@ oBrowser = function (name) {
 
     this.ascend = window.GetProperty('分组升序', true);
     this.size = window.GetProperty('分组大小', 200);
+    this.size = $Z(this.size);
     this.type = window.GetProperty('分组显示模式', 0);
     this.auto = window.GetProperty('分组后台加载', false);
     this.speed = window.GetProperty('分组加载速度', 5);

@@ -15,20 +15,20 @@ oListManagerItem = function (id) {
         if (this.id == fb.PlayingPlaylist && fb.IsPlaying) {
             color = ThemeStyle.fgColor_hl;
             if (Playlist.isp)
-                Image.Draw(gr, g_isp1_icon, x + 23, Math.floor(y + (h - g_isp1_icon.Height) / 2), 0, 255);
+                Image.Draw(gr, g_isp1_icon, x + $Z(23), Math.floor(y + (h - g_isp1_icon.Height) / 2), 0, 255);
             else
-                Image.Draw(gr, g_isp2_icon, x + 23, Math.floor(y + (h - g_isp1_icon.Height) / 2), 0, 255);
+                Image.Draw(gr, g_isp2_icon, x + $Z(23), Math.floor(y + (h - g_isp1_icon.Height) / 2), 0, 255);
         }
         else {
             color = ThemeStyle.fgColor;
-            gr.GdiDrawText(this.id + 1, ThemeStyle.font, color, x + 5, y, 50, h, DT_CV);
+            gr.GdiDrawText(this.id + 1, ThemeStyle.font, color, x + $Z(5), y, $Z(50), h, DT_CV);
         }
-        gr.GdiDrawText(plman.GetPlaylistName(this.id), ThemeStyle.font, color, x + 60, y, w - 120, h, DT_LV);
-        gr.GdiDrawText(plman.PlaylistItemCount(this.id), ThemeStyle.font, color, x + w - 60, y, 50, h, DT_RV);
+        gr.GdiDrawText(plman.GetPlaylistName(this.id), ThemeStyle.font, color, x + $Z(60), y, w - $Z(120), h, DT_LV);
+        gr.GdiDrawText(plman.PlaylistItemCount(this.id), ThemeStyle.font, color, x + w - $Z(60), y, $Z(50), h, DT_RV);
     }
 }
 
-var ListManager = new oListView('ListManager', 35, ENABLE_DRAG);
+var ListManager = new oListView('ListManager', $Z(35), ENABLE_DRAG);
 ListManager.title = '列表管理';
 
 ListManager.OnTime = function () {

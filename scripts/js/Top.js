@@ -29,12 +29,12 @@
             if (!oimage.$)
                 oimage = Image.Get(photo);
 
-            eval(name).img = Image.Circle(oimage.$, eval(name).$.h - 20, 2);
+            eval(name).img = Image.Circle(oimage.$, eval(name).$.h - $Z(20), 2);
             Image.Clear(oimage.$);
             oimage = null;
         }
         else {
-            eval(name).img = Image.Circle(gdi.Image(photo), eval(name).$.h - 20, 2);
+            eval(name).img = Image.Circle(gdi.Image(photo), eval(name).$.h - $Z(20), 2);
         }
         eval(name).$.Repaint();
     }
@@ -44,7 +44,7 @@
         if (metadb) {
             var oimage = AlbumArt.GetAtLeast(Metadb.Handle(), 0, true, true);
             if (!oimage.$) oimage = Image.Get(photo);
-            this.img = Image.Circle(oimage.$, this.$.h - 20, 2);
+            this.img = Image.Circle(oimage.$, this.$.h - $Z(20), 2);
             Image.Clear(oimage.$);
             oimage = null;
 
@@ -52,7 +52,7 @@
             this.Artist.Update(Metadb.TitleFormat('[%artist%]'));
         }
         else {
-            this.img = Image.Circle(gdi.Image(photo), this.$.h - 20, 2);
+            this.img = Image.Circle(gdi.Image(photo), this.$.h - $Z(20), 2);
 
             this.Title.Update('Fomer');
             this.Artist.Update('Keperlia');
@@ -152,21 +152,21 @@
     }
 
     this.OnSize = function (resize) {
-        this.Title.$.Size(this.$.x + this.$.h, this.$.y + 12, this.$.w - this.$.h - 120, 20, this.$.z + 1);
-        this.Artist.$.Size(this.$.x + this.$.h + 5, this.$.y + 42, this.$.w - this.$.h - 130, 15, this.$.z + 1);
-        this.Seek.$.Size(this.$.x, this.$.y + this.$.h - 5, this.$.w, 5, this.$.z + 1);
+        this.Title.$.Size(this.$.x + this.$.h, this.$.y + $Z(12), this.$.w - this.$.h - $Z(120), $Z(20), this.$.z + 1);
+        this.Artist.$.Size(this.$.x + this.$.h + $Z(5), this.$.y + $Z(42), this.$.w - this.$.h - $Z(130), $Z(15), this.$.z + 1);
+        this.Seek.$.Size(this.$.x, this.$.y + this.$.h - $Z(5), this.$.w, $Z(5), this.$.z + 1);
         if (fb.IsPlaying || fb.IsPaused)
             this.Seek.x = Math.floor(Progress.Value() * this.Seek.w);
 
-        this.Volume.$.Size(this.$.x + this.$.w - 95, this.$.y + this.$.h - 100, 30, 100, this.$.z - 1);
+        this.Volume.$.Size(this.$.x + this.$.w - $Z(95), this.$.y + this.$.h - $Z(100), $Z(30), $Z(100), this.$.z - 1);
         this.VolClient = { x: this.Volume.$.x, y: this.Volume.$.y + this.Volume.$.h, w: this.Volume.$.w, h: this.Volume.$.h };
         this.Volume.y = Math.floor(Volume.Value() * this.Volume.h);
         this.Volume.$.visible = false;
 
-        this.Menu.$.Size(this.$.x + this.$.w - 35, this.$.y + this.$.h - 35, 30, 26, this.$.z + 1);
-        this.Pbo.$.Size(this.$.x + this.$.w - 65, this.$.y + this.$.h - 35, 30, 26, this.$.z + 1);
-        this.Vol.$.Size(this.$.x + this.$.w - 95, this.$.y + this.$.h - 35, 30, 26, this.$.z + 1);
-        this.Mini.$.Size(this.$.x + this.$.w - 125, this.$.y + this.$.h - 35, 30, 26, this.$.z + 1);
+        this.Menu.$.Size(this.$.x + this.$.w - $Z(35), this.$.y + this.$.h - $Z(35), $Z(30), $Z(26), this.$.z + 1);
+        this.Pbo.$.Size(this.$.x + this.$.w - $Z(65), this.$.y + this.$.h - $Z(35), $Z(30), $Z(26), this.$.z + 1);
+        this.Vol.$.Size(this.$.x + this.$.w - $Z(95), this.$.y + this.$.h - $Z(35), $Z(30), $Z(26), this.$.z + 1);
+        this.Mini.$.Size(this.$.x + this.$.w - $Z(125), this.$.y + this.$.h - $Z(35), $Z(30), $Z(26), this.$.z + 1);
 
         resize && this.GetPhoto(Metadb.Handle());
     }

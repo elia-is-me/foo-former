@@ -18,15 +18,15 @@ oInfoItem = function (title, tf, write) {
             if (this.selected)
                 gr.FillSolidRect(x, y, w, h, ThemeStyle.bgColor_hl);
             else
-                gr.DrawLine(x + 15, y + h, x + w - 15, y + h, 1, $SetAlpha(ThemeStyle.fgColor, 32));
+                gr.DrawLine(x + $Z(15), y + h, x + w - $Z(15), y + h, $Z(1), $SetAlpha(ThemeStyle.fgColor, 32));
         }
-        gr.GdiDrawText(this.title, ThemeStyle.font, ThemeStyle.fgColor, x + 15, y, 80, h, DT_LV);
+        gr.GdiDrawText(this.title, ThemeStyle.font, ThemeStyle.fgColor, x + $Z(15), y, $Z(80), h, DT_LV);
         if (this.text)
-            gr.GdiDrawText(this.text, ThemeStyle.font, ThemeStyle.fgColor, x + 100, y, w - 120, h, DT_LV);
+            gr.GdiDrawText(this.text, ThemeStyle.font, ThemeStyle.fgColor, x + $Z(100), y, w - $Z(120), h, DT_LV);
     }
 }
 
-var Info = new oListView('Info', 35, ENABLE_NONE);
+var Info = new oListView('Info', $Z(35), ENABLE_NONE);
 
 Info.Init = function () {
     this.Dispose();
