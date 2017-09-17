@@ -1,6 +1,6 @@
 ﻿oLyric = function (name) {
     this.$ = new oPanel(name, false);
-    this.rowHeight = 35;
+    this.rowHeight = $Z(35);
     this.click = false;
     this.timer = null;
     this.line = 0;

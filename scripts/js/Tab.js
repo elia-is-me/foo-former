@@ -2,10 +2,10 @@
 Tab.num = 4;
 
 Tab.Paint = function (gr, x, y, w, h) {
-    gr.GdiDrawText('播放列表', ThemeStyle.font, ThemeStyle.fgColor, x, y, w, h, DT_CV);
-    gr.GdiDrawText('列表管理', ThemeStyle.font, ThemeStyle.fgColor, x + w, y, w, h, DT_CV);
-    gr.GdiDrawText('资源管理', ThemeStyle.font, ThemeStyle.fgColor, x + 2 * w, y, w, h, DT_CV);
-    gr.GdiDrawText('属性设置', ThemeStyle.font, ThemeStyle.fgColor, x + 3 * w, y, w, h, DT_CV);
+    gr.GdiDrawText('Songs', ThemeStyle.font, ThemeStyle.fgColor, x, y, w, h, DT_CV);
+    gr.GdiDrawText('Playlists', ThemeStyle.font, ThemeStyle.fgColor, x + w, y, w, h, DT_CV);
+    gr.GdiDrawText('Explorer', ThemeStyle.font, ThemeStyle.fgColor, x + 2 * w, y, w, h, DT_CV);
+    gr.GdiDrawText('Settings', ThemeStyle.font, ThemeStyle.fgColor, x + 3 * w, y, w, h, DT_CV);
 }
 
 Tab.OnChange = function () {

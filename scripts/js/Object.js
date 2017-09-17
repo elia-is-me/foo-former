@@ -44,7 +44,7 @@ oCheckBar = function (name, str, state, func, type) {
 
     this.OnSize = function (resize) {
         if (!resize) return;
-        var w = $Calc(this.str, ThemeStyle.smallFont, true) + 20;
+        var w = $Calc(this.str, ThemeStyle.smallFont, true) + $Z(20);
         if (w > this.$.w)
             w = this.$.w;
         this.$.w = w;
@@ -92,18 +92,18 @@ oCheckBar = function (name, str, state, func, type) {
         var color = this.gray ? ThemeStyle.fgColor_l : ThemeStyle.fgColor;
         if (this.type == TYPE_RADIO) {
             gr.SetSmoothingMode(2);
-            gr.DrawEllipse(this.$.x + 1, this.$.y + 5, 10, 10, 2, $SetAlpha(color, 128));
-            gr.DrawEllipse(this.$.x + 1, this.$.y + 5, 10, 10, 1, color);
+            gr.DrawEllipse(this.$.x + $Z(1), this.$.y + $Z(5), $Z(10), $Z(10), $Z(2), $SetAlpha(color, 128));
+            gr.DrawEllipse(this.$.x + $Z(1), this.$.y + $Z(5), $Z(10), $Z(10), $Z(1), color);
             if (this.state)
-                gr.FillEllipse(this.$.x + 3, this.$.y + 7, 6, 6, color);
+                gr.FillEllipse(this.$.x + $Z(3), this.$.y + $Z(7), $Z(6), $Z(6), color);
             gr.SetSmoothingMode(0);
         }
         else {
-            gr.DrawRect(this.$.x + 1, this.$.y + 5, 10, 10, 2, $SetAlpha(color, 192));
+            gr.DrawRect(this.$.x + $Z(1), this.$.y + $Z(5), $Z(10), $Z(10), $Z(2), $SetAlpha(color, 192));
             if (this.state)
-                gr.FillSolidRect(this.$.x + 3, this.$.y + 7, 6, 6, color);
+                gr.FillSolidRect(this.$.x + $Z(3), this.$.y + $Z(7), $Z(6), $Z(6), color);
         }
-        gr.GdiDrawText(this.str, ThemeStyle.smallFont, this.gray ? ThemeStyle.fgColor_l : ThemeStyle.fgColor, this.$.x + 15, this.$.y, this.$.w - 20, this.$.h, DT_LV);
+        gr.GdiDrawText(this.str, ThemeStyle.smallFont, this.gray ? ThemeStyle.fgColor_l : ThemeStyle.fgColor, this.$.x + $Z(15), this.$.y, this.$.w - $Z(20), this.$.h, DT_LV);
     }
 }
 
@@ -582,7 +582,7 @@ func = function(idx){}：回调函数
 oMenu = function (name, func, anime) {
     this.$ = new oPanel(name, false, false);
     this.idx = 0;
-    this.rowHeight = 20;
+    this.rowHeight = $Z(20);
     this.items = null;
     this.anime = anime;
     this.Animation = anime ? new oAnimation(name + '.Animation') : null;
@@ -625,7 +625,7 @@ oMenu = function (name, func, anime) {
         gr.FillSolidRect(this.$.x, this.$.y, this.$.w, this.$.h, ThemeStyle.bgColor_l);
         gr.FillSolidRect(this.$.x, this.$.y + this.idx * this.rowHeight, this.$.w, this.rowHeight, ThemeStyle.bgColor_hl);
         for (var i = 0; i < this.items.length; i++) {
-            gr.GdiDrawText(this.items[i], ThemeStyle.smallFont, ThemeStyle.fgColor, this.$.x + 10, this.$.y + i * this.rowHeight, this.$.w - 30, this.rowHeight, DT_LV);
+            gr.GdiDrawText(this.items[i], ThemeStyle.smallFont, ThemeStyle.fgColor, this.$.x + $Z(10), this.$.y + i * this.rowHeight, this.$.w - $Z(30), this.rowHeight, DT_LV);
         }
     }
 }
@@ -1155,7 +1155,7 @@ oScrollBar = function (name, parent, vertical, relative, bg) {
 
                 this.cursor.x = 0;
                 this.cursor.h = Math.floor(this.$.h * this.parent.h / this.parent.totalY);
-                if (this.cursor.h < 50) this.cursor.h = 50;
+                if (this.cursor.h < $Z(50)) this.cursor.h = $Z(50);
                 this.cursor.y = Math.floor((this.$.h - this.cursor.h) * this.parent.offsetY / (this.parent.totalY - this.parent.h));
                 this.cursor.w = this.$.w;
                 if (this.cursor.y < 0) {
@@ -1195,7 +1195,7 @@ oScrollBar = function (name, parent, vertical, relative, bg) {
                 this.Old.o = this.$.w;*/
 
                 this.cursor.w = Math.floor(this.$.w * this.parent.w / this.parent.totalX);
-                if (this.cursor.w < 50) this.cursor.w = 50;
+                if (this.cursor.w < $Z(50)) this.cursor.w = $Z(50);
                 this.cursor.x = Math.floor((this.$.w - this.cursor.w) * this.parent.offsetX / (this.parent.totalX - this.parent.w));
                 this.cursor.y = 0;
                 this.cursor.h = this.$.h;
@@ -1950,12 +1950,12 @@ oTabView = function (name, vertical, bg, defType) {
             this.Line.h = this.$.h / this.num;
             this.Line.y = this.focus * this.Line.h;
             this.Line.x = 0;
-            this.Line.w = 3;
+            this.Line.w = $Z(3);
         }
         else {
             this.Line.w = this.$.w / this.num;
             this.Line.x = this.focus * this.Line.w;
-            this.Line.h = 3;
+            this.Line.h = $Z(3);
             this.Line.y = this.$.h - this.Line.h;
         }
     }

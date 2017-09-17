@@ -7,7 +7,7 @@
     this.x = 0;
     this.y = 0;
     this.w = 0;
-    this.h = 35;
+    this.h = $Z(35);
     this.num = 0;
 
     this.Dispose = function () {
@@ -77,9 +77,9 @@
             gr.FillSolidRect(this.x - x, this.y - y, this.w, this.h, ThemeStyle.bgColor_hl);
 
         var color = this.metadb.Compare(fb.GetNowPlaying()) ? ThemeStyle.fgColor_hl : ThemeStyle.fgColor;
-        gr.GdiDrawText(this.i, ThemeStyle.font, color, this.x - x + 10, this.y - y, 50, this.h, DT_CV);
-        gr.GdiDrawText(Metadb.TitleFormat('[%title%]', this.metadb), ThemeStyle.font, color, this.x - x + 65, this.y - y, this.w - 120, this.h, DT_LV);
-        gr.GdiDrawText(Metadb.TitleFormat("$if( %length%, %length%, '--:--' )", this.metadb), ThemeStyle.font, color, this.x - x + this.w - 50, this.y - y, 40, this.h, DT_RV);
+        gr.GdiDrawText(this.i, ThemeStyle.font, color, this.x - x + $Z(10), this.y - y, $Z(50), this.h, DT_CV);
+        gr.GdiDrawText(Metadb.TitleFormat('[%title%]', this.metadb), ThemeStyle.font, color, this.x - x + $Z(65), this.y - y, this.w - $Z(120), this.h, DT_LV);
+        gr.GdiDrawText(Metadb.TitleFormat("$if( %length%, %length%, '--:--' )", this.metadb), ThemeStyle.font, color, this.x - x + this.w - $Z(50), this.y - y, $Z(40), this.h, DT_RV);
     }
 }
 
@@ -93,7 +93,7 @@ oLinearItem = function (parentName, id, idx, metadb) {
     this.x = 0;
     this.y = 0;
     this.w = 0;
-    this.h = 70;
+    this.h = $Z(70);
     this.num = 0;
 
     this.Dispose = function () {
@@ -239,17 +239,17 @@ oLinearItem = function (parentName, id, idx, metadb) {
             gr.FillSolidRect(this.x - x, this.y - y, this.w, this.h, ThemeStyle.bgColor_hl);
 
         if (this.Img) {
-            Image.Draw(gr, this.Img.$, this.x - x + 10, this.y - y + 10, 0, 255);
+            Image.Draw(gr, this.Img.$, this.x - x + $Z(10), this.y - y + $Z(10), 0, 255);
         }
 
         if (this.parent.key) {
-            gr.GdiDrawText(Metadb.TitleFormat('[%artist%]', this.metadb), ThemeStyle.font, ThemeStyle.fgColor, this.x - x + this.h, this.y - y + 15, this.w - this.h - 50, 20, DT_LV);
+            gr.GdiDrawText(Metadb.TitleFormat('[%artist%]', this.metadb), ThemeStyle.font, ThemeStyle.fgColor, this.x - x + this.h, this.y - y + $Z(15), this.w - this.h - $Z(50), $Z(20), DT_LV);
         }
         else {
-            gr.GdiDrawText(Metadb.TitleFormat('[%album%]', this.metadb), ThemeStyle.font, ThemeStyle.fgColor, this.x - x + this.h, this.y - y + 15, this.w - this.h - 50, 20, DT_LV);
-            gr.GdiDrawText(Metadb.TitleFormat('[%album artist%]', this.metadb), ThemeStyle.smallFont, ThemeStyle.fgColor_l, this.x - x + this.h, this.y - y + 40, this.w - this.h - 50, 20, DT_LV);
+            gr.GdiDrawText(Metadb.TitleFormat('[%album%]', this.metadb), ThemeStyle.font, ThemeStyle.fgColor, this.x - x + this.h, this.y - y + $Z(15), this.w - this.h - $Z(50), $Z(20), DT_LV);
+            gr.GdiDrawText(Metadb.TitleFormat('[%album artist%]', this.metadb), ThemeStyle.smallFont, ThemeStyle.fgColor_l, this.x - x + this.h, this.y - y + $Z(40), this.w - this.h - $Z(50), $Z(20), DT_LV);
         }
-        gr.GdiDrawText(this.num + '首', ThemeStyle.smallFont, ThemeStyle.fgColor_l, this.x - x + this.w - 50, this.y - y + 15, 40, 20, DT_RV);
+        gr.GdiDrawText(this.num + '首', ThemeStyle.smallFont, ThemeStyle.fgColor_l, this.x - x + this.w - $Z(50), this.y - y + $Z(15), $Z(40), $Z(20), DT_RV);
     }
 }
 
@@ -301,7 +301,7 @@ oLinear = function (name) {
         }
         if (Img.$) {
             // 裁剪处理
-            Img.$ = Image.Circle(Img.$, 50, 2);
+            Img.$ = Image.Circle(Img.$, $Z(50), 2);
             this.icon = Img;
             this.icon.src = 'no';
             if (Img.$) {

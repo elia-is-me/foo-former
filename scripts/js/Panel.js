@@ -52,8 +52,7 @@ oPanel = function (name, visible, modal, ThemeStyle) {
     }
 
     this.Repaint = function (force) {
-        if (typeof (eval(this.name).OnRepaint) == 'function')
-            eval(this.name).OnRepaint();
+        $Invoke(this.name, 'OnRepaint');
         if (this.visible || force) {
             $RepaintRect(this.x, this.y, this.w, this.h);
         }
@@ -75,15 +74,13 @@ oPanel = function (name, visible, modal, ThemeStyle) {
             resize = true;
         }
         if (typeof (z) == 'number') this.z = z;
-        if (typeof (eval(this.name).OnSize) == 'function')
-            eval(this.name).OnSize(resize);
+        $Invoke(this.name, 'OnSize', resize);
     }
 
     this.Hide = function () {
         this.visible = false;
         Panel.focus = null;
-        if (typeof (eval(this.name).OnRepaint) == 'function')
-            eval(this.name).OnRepaint();
+        $Invoke(this.name, 'OnRepaint');
         if (this.modal)
             window.Repaint();
         else
@@ -111,10 +108,8 @@ oPanel = function (name, visible, modal, ThemeStyle) {
         if (Drag.Move(x, y)) {
             this.x = Drag.x - Drag.Pos.x;
             this.y = Drag.y - Drag.Pos.y;
-            if (typeof (eval(this.name).OnMove) == 'function')
-                eval(this.name).OnMove(this.x, this.y);
-            if (typeof (eval(this.name).OnSize) == 'function')
-                eval(this.name).OnSize();
+            $Invoke(this.name, 'OnMove', this.x, this.y);
+            $Invoke(this.name, 'OnSize');
             window.Repaint();
         }
     }
@@ -127,16 +122,14 @@ oPanel = function (name, visible, modal, ThemeStyle) {
     }
 
     this.Paint = function (gr) {
-        if (typeof (eval(this.name).OnPrevPaint) == 'function')
-            eval(this.name).OnPrevPaint(gr);
+        $Invoke(this.name, 'OnPrevPaint', gr);
         if (this.bg) {
             Image.Draw(gr, this.bg, this.x, this.y, 0, 255);
         }
         if (ThemeStyle && typeof (ThemeStyle.bgColor) == 'number') {
             gr.FillSolidRect(this.x, this.y, this.w, this.h, ThemeStyle.bgColor);
         }
-        if (typeof (eval(this.name).OnPaint) == 'function')
-            eval(this.name).OnPaint(gr);
+        $Invoke(this.name, 'OnPaint', gr);
     }
 }
 
@@ -150,7 +143,7 @@ Panel = {
     CheckVisible: function () {
         var isVisible = '';
         for (var i = 0; i < this.panels.length; i++) {
-            if (eval(this.panels[i]).$.visible) {
+            if ($Get(this.panels[i], '$').visible) {
                 isVisible += this.panels[i] + ' . ';
             }
         }
@@ -168,14 +161,14 @@ Panel = {
                 delete eval(name[i]).$;
                 eval(name[i]).$ = null;
             }
-            if (typeof (eval(name[0]).Destory) == 'function') eval(name[0]).Destory();
+            $Invoke(name[0], 'Destory');
         }
         else {
             this.panels.Remove(name);
             eval(name).$.Hide();
             delete eval(name).$;
             eval(name).$ = null;
-            if (typeof (eval(name).Destory) == 'function') eval(name).Destory();
+            $Invoke(name[0], 'Destory');
         }
     },
 
@@ -229,24 +222,22 @@ Panel = {
             this.focus = this.panels[this.active];
 
         if (defocus != this.focus) {
-            if (defocus && typeof (eval(defocus).Defocus) == 'function')
-                eval(defocus).Defocus(x, y);
-            if (this.focus && typeof (eval(this.focus).Focus) == 'function')
-                eval(this.focus).Focus(x, y);
+            $Invoke(defocus, 'Defocus', x, y);
+            $Invoke(this.focus, 'Focus', x, y);
         }
     },
 
     Key: function (vkey) {
         if (g_unsized || g_unloaded) return;
-        if (this.focus && typeof (eval(this.focus).OnKey) == 'function') {
-            eval(this.focus).OnKey(vkey);
+        if (this.focus) {
+            $Invoke(this.focus, 'OnKey', vkey);
         }
     },
 
     Char: function (code) {
         if (g_unsized || g_unloaded) return;
-        if (this.focus && typeof (eval(this.focus).OnChar) == 'function') {
-            eval(this.focus).OnChar(code);
+        if (this.focus) {
+            $Invoke(this.focus, 'OnChar', code);
         }
     },
 
@@ -283,20 +274,20 @@ Panel = {
             }
 
             if (invalid != this.active) {
-                if (invalid != -1 && typeof (eval(this.panels[invalid]).Invalid) == 'function')
-                    eval(this.panels[invalid]).Invalid(x, y);
-                if (this.active != -1 && typeof (eval(this.panels[this.active]).Activate) == 'function')
-                    eval(this.panels[this.active]).Activate(x, y);
+                if (invalid != -1)
+                    $Invoke(this.panels[invalid], 'Invalid', x, y);
+                if (this.active != -1)
+                    $Invoke(this.panels[this.active], 'Activate', x, y);
             }
         }
 
-        if (this.active != -1 && typeof (eval(this.panels[this.active]).OnMouse) == 'function') {
+        if (this.active != -1) {
             if (this.focus && eval(this.focus).$.modal) {
                 if (eval(this.panels[this.active]).$.z >= eval(this.focus).$.z)
-                    eval(this.panels[this.active]).OnMouse(event, x, y);
+                    $Invoke(this.panels[this.active], 'OnMouse', event, x, y);
             }
             else
-                eval(this.panels[this.active]).OnMouse(event, x, y);
+                $Invoke(this.panels[this.active], 'OnMouse', event, x, y);
         }
     },
 

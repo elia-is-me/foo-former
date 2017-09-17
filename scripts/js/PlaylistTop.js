@@ -12,9 +12,9 @@
         this.Tab.num = 3;
 
         this.Tab.Paint = function (gr, x, y, w, h) {
-            gr.GdiDrawText('单曲', ThemeStyle.font, ThemeStyle.fgColor, x, y, w, h, DT_CV);
-            gr.GdiDrawText('专辑', ThemeStyle.font, ThemeStyle.fgColor, x + w, y, w, h, DT_CV);
-            gr.GdiDrawText('艺术家', ThemeStyle.font, ThemeStyle.fgColor, x + 2 * w, y, w, h, DT_CV);
+            gr.GdiDrawText('Tracks', ThemeStyle.font, ThemeStyle.fgColor, x, y, w, h, DT_CV);
+            gr.GdiDrawText('Albums', ThemeStyle.font, ThemeStyle.fgColor, x + w, y, w, h, DT_CV);
+            gr.GdiDrawText('Artists', ThemeStyle.font, ThemeStyle.fgColor, x + 2 * w, y, w, h, DT_CV);
         }
 
         this.Tab.OnChange = function () {
@@ -83,7 +83,7 @@
         this.OnSearch = function () {
             if (eval(name).searchfrom) {
                 var str = '网络搜索';
-                AInput(str, eval(name).$.x + 35, eval(name).$.y + 3, eval(name).$.w - 180, 24);
+                AInput(str, eval(name).$.x + $Z(35), eval(name).$.y + $Z(3), eval(name).$.w - $Z(180), $Z(24));
 
                 Input.Defocus = function () {
                     Input.$.Hide();
@@ -92,7 +92,7 @@
                     }
                 }
             } else {
-                ASearch(Math.floor(Playlist.$.x + (Playlist.$.w - 280) / 2), Math.floor(Playlist.$.y + 25), Playlist.$.z + 4);
+                ASearch(Math.floor(Playlist.$.x + (Playlist.$.w - $Z(280)) / 2), Math.floor(Playlist.$.y + $Z(25)), Playlist.$.z + 4);
             } /* else if (g_playlist_tab == 1) {
                 var str = '专辑搜索';
                 AInput(str, eval(name).$.x + 35, eval(name).$.y + 3, eval(name).$.w - 180, 24);
@@ -154,14 +154,14 @@
             }
         }
 
-        this.Type.$.Size(this.$.x + 5, this.$.y, 30, 30, this.$.z + 1);
-        this.Sort.$.Size(this.$.x + this.$.w - 65, this.$.y, 30, 30, this.$.z + 1);
-        this.Search.$.Size(this.$.x + this.$.w - 35, this.$.y, 30, 30, this.$.z + 1);
-        this.Key.$.Size(this.$.x + this.$.w - 140, this.$.y + 5, 70, 20, this.$.z + 1);
-        this.Menu.$.Size(this.$.x + this.$.w - 140, this.$.y + 25, 70, 40, this.$.z + 1);
-        this.Tab.$.Size(this.$.x, this.$.y + 30, this.$.w, 30, this.$.z + 1);
+        this.Type.$.Size(this.$.x + $Z(5), this.$.y, $Z(30), $Z(30), this.$.z + 1);
+        this.Sort.$.Size(this.$.x + this.$.w - $Z(65), this.$.y, $Z(30), $Z(30), this.$.z + 1);
+        this.Search.$.Size(this.$.x + this.$.w - $Z(35), this.$.y, $Z(30), $Z(30), this.$.z + 1);
+        this.Key.$.Size(this.$.x + this.$.w - $Z(140), this.$.y + $Z(5), $Z(70), $Z(20), this.$.z + 1);
+        this.Menu.$.Size(this.$.x + this.$.w - $Z(140), this.$.y + $Z(25), $Z(70), $Z(40), this.$.z + 1);
+        this.Tab.$.Size(this.$.x, this.$.y + $Z(30), this.$.w, $Z(30), this.$.z + 1);
 
-        Sort.$.Size(Math.floor(this.$.x + (this.$.w - 350) / 2), this.$.y + this.$.h + 50, 350, 100);
+        Sort.$.Size(Math.floor(this.$.x + (this.$.w - $Z(350)) / 2), this.$.y + this.$.h + $Z(50), $Z(350), $Z(100));
 
         Playlist.$.Size(this.$.x, this.$.y + this.$.h, this.$.w, Tab.$.y - this.$.y - this.$.h);
         AlbumBrowser.$.Size(this.$.x, this.$.y + this.$.h, this.$.w, Tab.$.y - this.$.y - this.$.h);
@@ -198,7 +198,7 @@
     this.OnPaint = function (gr) {
         if (this.$.bg)
             gr.FillSolidRect(this.$.x, this.$.y, this.$.w, this.$.h, ThemeStyle.bgColor_l);
-        gr.GdiDrawText(this.text, ThemeStyle.font, ThemeStyle.fgColor, this.$.x + 40, this.$.y, this.$.w - 200, 30, DT_LV);
+        gr.GdiDrawText(this.text, ThemeStyle.font, ThemeStyle.fgColor, this.$.x + $Z(40), this.$.y, this.$.w - $Z(200), $Z(30), DT_LV);
     }
 }
 

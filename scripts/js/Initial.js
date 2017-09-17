@@ -36,10 +36,14 @@ var ThemeStyle = {
     bgColor_hl: 0
 }
 
-var g_mini_icon = gdi.Image(PATH_ICO + 'mini.png');
+function $ZImage (image, interpo) {
+    return image.Resize($Z(image.width), $Z(image.height), interpo);
+}
+
+var g_mini_icon = $ZImage(gdi.Image(PATH_ICO + 'mini.png'));
 var g_vol_icon = null, g_point_icon = null;
-var g_pbo_icon = gdi.Image(PATH_ICO + 'Pbo\\' + fb.PlaybackOrder + '.png');
-var g_menu_icon = gdi.Image(PATH_ICO + 'menu.png');
+var g_pbo_icon = $ZImage(gdi.Image(PATH_ICO + 'Pbo\\' + fb.PlaybackOrder + '.png'));
+var g_menu_icon = $ZImage(gdi.Image(PATH_ICO + 'menu.png'));
 
 var g_arrow_icon = null, g_pos_icon = null;
 var g_search_icon = null, g_sort_icon = null;
@@ -73,7 +77,7 @@ function GetCustomFont() {
     var font_name = window.GetProperty('字体名称', '微软雅黑');
     var font_size = window.GetProperty('字体大小', 12);
     var font_type = window.GetProperty('字体类型', 0);
-    ThemeStyle.font = gdi.Font(font_name, font_size, font_type);
+    ThemeStyle.font = gdi.Font(font_name, $Z(font_size), font_type);
 }
 
 function GetFonts() {
@@ -161,6 +165,7 @@ function GetIcons() {
     g.DrawLine(5, 6, 8, 9, 1, ThemeStyle.fgColor);
     g.DrawLine(8, 9, 11, 6, 1, ThemeStyle.fgColor);
     g_arrow_icon.ReleaseGraphics(g);
+    g_arrow_icon = g_arrow_icon.Resize($Z(16), $Z(16), 7);
 
     if (!g_pos_icon) {
         g_pos_icon = gdi.CreateImage(20, 20);
@@ -169,6 +174,7 @@ function GetIcons() {
         g.FillEllipse(2, 2, 16, 16, 0x40ffffff);
         g.FillEllipse(6, 6, 8, 8, 0xffffffff);
         g_pos_icon.ReleaseGraphics(g);
+        g_pos_icon = g_pos_icon.Resize($Z(20), $Z(20), 7);
     }
 
     g_check_icon && g_check_icon.Dispose();
@@ -178,6 +184,7 @@ function GetIcons() {
     g.DrawLine(8, 14, 12, 21, 2, ThemeStyle.fgColor_hl);
     g.DrawLine(12, 20, 24, 10, 2, ThemeStyle.fgColor_hl);
     g_check_icon.ReleaseGraphics(g);
+    g_check_icon =  g_check_icon.Resize($Z(30), $Z(30), 7);
 
     g_list_icon && g_list_icon.Dispose();
     g_list_icon = gdi.CreateImage(30, 30);
@@ -189,6 +196,7 @@ function GetIcons() {
     g.DrawRect(7, 19, 3, 3, 1, ThemeStyle.fgColor_l);
     g.DrawRect(12, 19, 11, 3, 1, ThemeStyle.fgColor_l);
     g_list_icon.ReleaseGraphics(g);
+    g_list_icon = g_list_icon.Resize($Z(30), $Z(30), 7);
 
     g_group_icon && g_group_icon.Dispose();
     g_group_icon = gdi.CreateImage(30, 30);
@@ -198,6 +206,7 @@ function GetIcons() {
     g.DrawRect(7, 16, 7, 7, 1, ThemeStyle.fgColor_l);
     g.DrawRect(16, 16, 7, 7, 1, ThemeStyle.fgColor_l);
     g_group_icon.ReleaseGraphics(g);
+    g_group_icon = g_group_icon.Resize($Z(30), $Z(30), 7);
 
     g_sort_icon && g_sort_icon.Dispose();
     g_sort_icon = gdi.CreateImage(30, 30);
@@ -210,6 +219,7 @@ function GetIcons() {
     g.DrawLine(16, 13, 20, 8, 2, ThemeStyle.fgColor_l);
     g.DrawLine(23, 13, 19, 8, 2, ThemeStyle.fgColor_l);
     g_sort_icon.ReleaseGraphics(g);
+    g_sort_icon = g_sort_icon.Resize($Z(30), $Z(30), 7);
 
     g_search_icon && g_search_icon.Dispose();
     g_search_icon = gdi.CreateImage(30, 30);
@@ -220,6 +230,7 @@ function GetIcons() {
     g.DrawEllipse(7, 7, 13, 13, 2, $SetAlpha(ThemeStyle.fgColor_l, 128));
     g.DrawLine(18, 18, 23, 23, 2, $SetAlpha(ThemeStyle.fgColor_l, 128));
     g_search_icon.ReleaseGraphics(g);
+    g_search_icon = g_search_icon.Resize($Z(30), $Z(30), 7);
 
     g_isp1_icon && g_isp1_icon.Dispose();
     g_isp1_icon = gdi.CreateImage(14, 12);
@@ -230,6 +241,7 @@ function GetIcons() {
     g.FillSolidRect(9, 6, 2, 6, ThemeStyle.fgColor_hl);
     g.FillSolidRect(12, 4, 2, 8, ThemeStyle.fgColor_hl);
     g_isp1_icon.ReleaseGraphics(g);
+    g_isp1_icon = g_isp1_icon.Resize($Z(14), $Z(12), 7);
 
     g_isp2_icon && g_isp2_icon.Dispose();
     g_isp2_icon = gdi.CreateImage(14, 12);
@@ -240,6 +252,7 @@ function GetIcons() {
     g.FillSolidRect(9, 7, 2, 5, ThemeStyle.fgColor_hl);
     g.FillSolidRect(12, 2, 2, 10, ThemeStyle.fgColor_hl);
     g_isp2_icon.ReleaseGraphics(g);
+    g_isp2_icon = g_isp2_icon.Resize($Z(14),$Z(12), 7);
 
     g_forward_icon && g_forward_icon.Dispose();
     g_forward_icon = gdi.CreateImage(25, 25);
@@ -248,6 +261,7 @@ function GetIcons() {
     g.DrawLine(17, 13, 8, 5, 2, ThemeStyle.fgColor_l);
     g.DrawLine(17, 12, 8, 20, 2, ThemeStyle.fgColor_l);
     g_forward_icon.ReleaseGraphics(g);
+    g_forward_icon = g_forward_icon.Resize($Z(25), $Z(25), 7);
     g_forward_icon = g_forward_icon.ApplyAlpha(128);
 
     g_back_icon && g_back_icon.Dispose();
@@ -257,6 +271,7 @@ function GetIcons() {
     g.DrawLine(19, 26, 30, 15, 3, ThemeStyle.fgColor);
     g.DrawLine(19, 24, 30, 35, 3, ThemeStyle.fgColor);
     g_back_icon.ReleaseGraphics(g);
+    g_back_icon = g_back_icon.Resize($Z(50), $Z(50), 7);
 
     g_play_icon && g_play_icon.Dispose();
     g_play_icon = gdi.CreateImage(50, 50);
@@ -265,6 +280,7 @@ function GetIcons() {
     g.FillPolygon(ThemeStyle.fgColor, 0, Array(16, 10, 16, 40, 40, 25));
     g.DrawPolygon($SetAlpha(ThemeStyle.fgColor, 128), 1, Array(16, 10, 16, 40, 40, 25));
     g_play_icon.ReleaseGraphics(g);
+    g_play_icon = g_play_icon.Resize($Z(50), $Z(50), 7);
 
     g_pause_icon && g_pause_icon.Dispose();
     g_pause_icon = gdi.CreateImage(50, 50);
@@ -272,6 +288,7 @@ function GetIcons() {
     g.FillSolidRect(15, 11, 8, 29, ThemeStyle.fgColor);
     g.FillSolidRect(28, 11, 8, 29, ThemeStyle.fgColor);
     g_pause_icon.ReleaseGraphics(g);
+    g_pause_icon = g_pause_icon.Resize($Z(50), $Z(50), 7);
 
     g_prev_icon && g_prev_icon.Dispose();
     g_prev_icon = gdi.CreateImage(50, 50);
@@ -282,6 +299,7 @@ function GetIcons() {
     g.FillPolygon(ThemeStyle.fgColor, 0, Array(23, 25, 38, 35, 38, 15));
     g.DrawPolygon($SetAlpha(ThemeStyle.fgColor, 128), 1, Array(23, 25, 38, 35, 38, 15));
     g_prev_icon.ReleaseGraphics(g);
+    g_prev_icon = g_prev_icon.Resize($Z(50), $Z(50), 7);
 
     g_next_icon && g_next_icon.Dispose();
     g_next_icon = gdi.CreateImage(50, 50);
@@ -292,6 +310,7 @@ function GetIcons() {
     g.FillPolygon(ThemeStyle.fgColor, 0, Array(27, 15, 27, 35, 42, 25));
     g.DrawPolygon($SetAlpha(ThemeStyle.fgColor, 128), 1, Array(27, 15, 27, 35, 42, 25));
     g_next_icon.ReleaseGraphics(g);
+    g_next_icon = g_next_icon.Resize($Z(50), $Z(50), 7);
 
     g_track_icon && g_track_icon.Dispose();
     g_track_icon = gdi.CreateImage(50, 50);
@@ -300,6 +319,7 @@ function GetIcons() {
     g.FillSolidRect(22, 22, 6, 6, ThemeStyle.fgColor);
     g.FillSolidRect(22, 30, 6, 6, ThemeStyle.fgColor);
     g_track_icon.ReleaseGraphics(g);
+    g_track_icon = g_track_icon.Resize($Z(50), $Z(50), 7);
 
     if (!g_home_icon) {
         g_home_icon = gdi.CreateImage(50, 50);
@@ -315,6 +335,7 @@ function GetIcons() {
         g.DrawEllipse(13, 13, 22, 22, 2, $RGBA(0, 0, 0, 32));
         g.DrawEllipse(13, 13, 22, 22, 1, $RGBA(0, 0, 0, 64));
         g_home_icon.ReleaseGraphics(g);
+        g_home_icon = g_home_icon.Resize($Z(50), $Z(50), 7);
     }
 
     if (!g_point_icon) {
@@ -323,6 +344,7 @@ function GetIcons() {
         g.SetSmoothingMode(4);
         g.FillEllipse(5, 5, 15, 15, $RGB(255, 255, 255));
         g_point_icon.ReleaseGraphics(g);
+        // g_point_icon = g_point_icon.Resize($Z(25), $Z(25), 7);
         g_point_icon = Image.Blur(g_point_icon, 1, 1);
     }
 
@@ -333,6 +355,7 @@ function GetIcons() {
     g.FillRoundRect(2, 2, 41, 21, 10, 10, ThemeStyle.bgColor_l);
     Image.Draw(g, g_point_icon, 1, 0, 0, 255);
     g_false_icon.ReleaseGraphics(g);
+    g_false_icon = g_false_icon.Resize($Z(45), $Z(25), 7);
 
     g_true_icon && g_true_icon.Dispose();
     g_true_icon = gdi.CreateImage(45, 25);
@@ -341,6 +364,7 @@ function GetIcons() {
     g.FillRoundRect(2, 2, 41, 21, 10, 10, ThemeStyle.bgColor_hl);
     Image.Draw(g, g_point_icon, 19, 0, 0, 255);
     g_true_icon.ReleaseGraphics(g);
+    g_true_icon = g_true_icon.Resize($Z(45), $Z(25), 7);
 }
 
 function GetVol() {
@@ -348,19 +372,19 @@ function GetVol() {
     var pos = Math.floor(((Math.pow(10, fb.Volume / 50) - 0.01) / 0.99) * 100);
     switch (true) {
         case pos <= 0:
-            g_vol_icon = gdi.Image(PATH_ICO + 'Vol\\1.png');
+            g_vol_icon = $ZImage(gdi.Image(PATH_ICO + 'Vol\\1.png'));
             break;
 
         case pos <= 30:
-            g_vol_icon = gdi.Image(PATH_ICO + 'Vol\\2.png');
+            g_vol_icon = $ZImage(gdi.Image(PATH_ICO + 'Vol\\2.png'));
             break;
 
         case pos <= 60:
-            g_vol_icon = gdi.Image(PATH_ICO + 'Vol\\3.png');
+            g_vol_icon = $ZImage(gdi.Image(PATH_ICO + 'Vol\\3.png'));
             break;
 
         case pos <= 100:
-            g_vol_icon = gdi.Image(PATH_ICO + 'Vol\\4.png');
+            g_vol_icon = $ZImage(gdi.Image(PATH_ICO + 'Vol\\4.png'));
             break;
     }
 }
@@ -398,10 +422,10 @@ function Load() {
     GetVol();
 
     Console = new oConsole('Console');
-    Console.$.Size(0, 0, 0, 40, 99);
+    Console.$.Size(0, 0, 0, $Z(40), $Z(99));
 
     Home = new oHome('Home');
-    Home.$.Size(0, 0, 50, 50, 90);
+    Home.$.Size(0, 0, $Z(50), $Z(50), 90);
     Home.$.x = window.GetProperty('主按钮左', 5);
     Home.$.y = window.GetProperty('主按钮上', 300);
 

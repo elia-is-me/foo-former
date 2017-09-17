@@ -6,26 +6,26 @@
         var y = this.$.y;
         var w = this.$.w;
         var h = this.$.h;
-        Console.maxWidth = w - 50;
-        Console.$.y = y + h - 100;
+        Console.maxWidth = w - $Z(50);
+        Console.$.y = y + h - $Z(100);
 
-        Tab.$.Size(x, y + h - 30, w, 30);
-        Top.$.Size(x, y, w, 70);
+        Tab.$.Size(x, y + h - $Z(30), w, $Z(30));
+        Top.$.Size(x, y, w, $Z(70));
 
-        PlaylistTop.$.Size(x, Top.$.y + Top.$.h, w, 60);
+        PlaylistTop.$.Size(x, Top.$.y + Top.$.h, w, $Z(60));
 
         ListManager.$.Size(x, Top.$.y + Top.$.h, w, h - Tab.$.h - Top.$.h);
         Explorer.$.Size(x, Top.$.y + Top.$.h, w, h - Tab.$.h - Top.$.h);
         Setting.$.Size(x, Top.$.y + Top.$.h, w, h - Tab.$.h - Top.$.h);
 
-        Info.$.Size(x + w - Math.min(w - 80, 450), y, Math.min(w - 80, 450), h);
+        Info.$.Size(x + w - Math.min(w - $Z(80), $Z(450)), y, Math.min(w - $Z(80), $Z(450)), h);
         Exhibition.$.Size(x, y, w, h);
 
-        PlayQueue.$.Size(0, Main.$.y + Main.$.h + PlayQueue.rowHeight, ww, 250, 45);
+        PlayQueue.$.Size(0, Main.$.y + Main.$.h + PlayQueue.rowHeight, ww, $Z(250), $Z(45));
         if (g_exhibit)
-            Rating.$.Size(x + Math.floor(w / 2 - 47), y + h - 160, 100, 30);
+            Rating.$.Size(x + Math.floor(w / 2 - $Z(47)), y + h - $Z(160), $Z(100), $Z(30));
         else
-            Rating.$.Size(x + w - 110, y + 7, 100, 30);
+            Rating.$.Size(x + w - $Z(110), y + $Z(7), $Z(100), $Z(30));
     }
 }
 
@@ -39,10 +39,8 @@ oDialog = function (name) {
 
     this.Init = function () {
         this.OnEnsure = function () {
-            if (typeof (eval(name).Positive()) == 'function') {
-                eval(name).Positive();
-            }
-            eval(name).OnCancel();
+            $Invoke(name, 'Positive');
+            $Invoke(name, 'OnCancel');
         }
         this.OnCancel = function () {
             if (typeof (eval(name).Negative()) == 'function') {
@@ -90,12 +88,12 @@ function ADialog(title, text, Positive, Negative, OnShow) {
         Dialog.Positive = Positive;
         Dialog.Negative = Negative;
 
-        Dialog.$.Size(Math.floor(ww / 2 - 115), Math.floor(wh / 2 - 60), 230, 120, 95);
+        Dialog.$.Size(Math.floor(ww / 2 - $Z(115)), Math.floor(wh / 2 - $Z(60)), $Z(230), $Z(120), 95);
         Dialog.SetVisible(true);
         Dialog.$.Show();
     } else {
         Dialog = new oDialog('Dialog');
-        Dialog.$.Size(Math.floor(ww / 2 - 115), Math.floor(wh / 2 - 60), 230, 120, 95);
+        Dialog.$.Size(Math.floor(ww / 2 - $Z(115)), Math.floor(wh / 2 - $Z(60)), $Z(230), $Z(120), 95);
         Panel.Sort();
 
         Dialog.title = title;

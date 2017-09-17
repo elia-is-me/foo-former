@@ -23,9 +23,9 @@
         if (this.selected)
             gr.FillSolidRect(x, y, w, h, ThemeStyle.bgColor_hl);
 
-        gr.GdiDrawText(this.name + ' (' + this.letter + ':)', ThemeStyle.font, ThemeStyle.fgColor, x + 20, y, w - 40, 35, DT_LV);
+        gr.GdiDrawText(this.name + ' (' + this.letter + ':)', ThemeStyle.font, ThemeStyle.fgColor, x + $Z(20), y, w - $Z(40), $Z(35), DT_LV);
         if (this.type < Explorer.driverType.length)
-            gr.GdiDrawText(Explorer.driverType[this.type], ThemeStyle.smallFont, ThemeStyle.fgColor_l, x + 30, y + 35, w - 50, 25, DT_LV);
+            gr.GdiDrawText(Explorer.driverType[this.type], ThemeStyle.smallFont, ThemeStyle.fgColor_l, x + $Z(30), y + $Z(35), w - $Z(50), $Z(25), DT_LV);
     }
 }
 
@@ -53,7 +53,7 @@ oFolder = function (path, name, id) {
         if (this.selected)
             gr.FillSolidRect(x, y, w, h, ThemeStyle.bgColor_hl);
 
-        gr.GdiDrawText(this.name, ThemeStyle.font, ThemeStyle.fgColor, x + 20, y, w - 40, h, DT_LV);
+        gr.GdiDrawText(this.name, ThemeStyle.font, ThemeStyle.fgColor, x + $Z(20), y, w - $Z(40), h, DT_LV);
     }
 }
 
@@ -84,12 +84,12 @@ oFile = function (name, id, size, type, path, attr) {
         if (this.selected)
             gr.FillSolidRect(x, y, w, h, ThemeStyle.bgColor_hl);
 
-        gr.GdiDrawText(this.name, ThemeStyle.font, ThemeStyle.fgColor, x + 20, y, w - 40, 35, DT_LV);
-        gr.GdiDrawText(this.type + ' : ' + this.size, ThemeStyle.smallFont, ThemeStyle.fgColor_l, x + 30, y + 35, w - 50, 20, DT_LV);
+        gr.GdiDrawText(this.name, ThemeStyle.font, ThemeStyle.fgColor, x + $Z(20), y, w - $Z(40), $Z(35), DT_LV);
+        gr.GdiDrawText(this.type + ' : ' + this.size, ThemeStyle.smallFont, ThemeStyle.fgColor_l, x + $Z(30), y + $Z(35), w - $Z(50), $Z(20), DT_LV);
     }
 }
 
-var Explorer = new oListView('Explorer', 60, ENABLE_SELECT);
+var Explorer = new oListView('Explorer', $Z(60), ENABLE_SELECT);
 
 Explorer.title = '资源管理';
 Explorer.path = '';

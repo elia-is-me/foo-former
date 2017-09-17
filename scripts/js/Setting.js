@@ -28,24 +28,24 @@ oSettingItem = function (title, value, func, skip, roaming) {
             if (this.selected)
                 gr.FillSolidRect(x, y, w, h, ThemeStyle.bgColor_hl);
             else
-                gr.DrawLine(x + 15, y + h, x + w - 15, y + h, 1, $SetAlpha(ThemeStyle.fgColor, 32));
+                gr.DrawLine(x + $Z(15), y + h, x + w - $Z(15), y + h, $Z(1), $SetAlpha(ThemeStyle.fgColor, 32));
         }
 
         if (this.skip) {
-            Image.Draw(gr, g_forward_icon, x + w - 40, Math.floor(y + (h - g_forward_icon.Height) / 2), 0, 255);
+            Image.Draw(gr, g_forward_icon, x + w - $Z(40), Math.floor(y + (h - g_forward_icon.Height) / 2), 0, 255);
         }
         if (typeof (this.value) == 'boolean') {
             if (this.value)
-                Image.Draw(gr, g_true_icon, x + w - 60, Math.floor(y + (h - g_true_icon.Height) / 2), 0, 255);
+                Image.Draw(gr, g_true_icon, x + w - $Z(60), Math.floor(y + (h - g_true_icon.Height) / 2), 0, 255);
             else
-                Image.Draw(gr, g_false_icon, x + w - 60, Math.floor(y + (h - g_true_icon.Height) / 2), 0, 255);
+                Image.Draw(gr, g_false_icon, x + w - $Z(60), Math.floor(y + (h - g_true_icon.Height) / 2), 0, 255);
         }
 
-        gr.GdiDrawText(this.title, ThemeStyle.font, ThemeStyle.fgColor, x + 15, y, w - 100, h, DT_LV);
+        gr.GdiDrawText(this.title, ThemeStyle.font, ThemeStyle.fgColor, x + $Z(15), y, w - $Z(100), h, DT_LV);
     }
 }
 
-var Setting = new oListView('Setting', 35, ENABLE_NONE);
+var Setting = new oListView('Setting', $Z(35), ENABLE_NONE);
 
 Setting.OnVisible = function (vis) {
     if (!vis && Color && Color.$.visible)

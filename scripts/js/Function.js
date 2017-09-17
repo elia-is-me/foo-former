@@ -1107,3 +1107,32 @@ function $cloneObject(obj) {
 
     return newObj;
 }
+
+function $Invoke (panelName, method) {
+    if (!eval(panelName)) return;
+    var args = [].slice.call(arguments, 2);
+    var func = eval(panelName)[method];
+    return (func == null ? null : func.apply(eval(panelName), args));
+}
+
+function $Get (panelName, prop) {
+    return eval(panelName)[prop];
+}
+
+// Return a zoomed value, to adapt Windows zoom percent.
+var $Z = (function () {
+  var zoomFactor = parseInt(window.GetProperty('zoom percent', 0)) / 100;
+  var objShell, tmp, factor;
+
+  if (zoomFactor > 0.5) {
+    factor = zoomFactor;
+  } else {
+    objShell = new ActiveXObject('WScript.Shell');
+    tmp = objShell.RegRead('HKEY_CURRENT_USER\\Control Panel\\Desktop\\WindowMetrics\\AppliedDPI');
+    factor = Math.round(tmp / 96 * 100) / 100;
+  }
+
+  return function (value) {
+    return Math.round(value * factor);
+  };
+}());
