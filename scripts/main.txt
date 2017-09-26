@@ -3,6 +3,7 @@
 // @author "keperlia"
 // @version "1.0"
 // @feature "dragdrop"
+// @import "%fb2k_path%skins\scripts\js\Function.js"
 // @import "%fb2k_path%skins\scripts\js\Panel.js"
 // @import "%fb2k_path%skins\scripts\js\Object.js"
 // @import "%fb2k_path%skins\scripts\js\Animation.js"
@@ -15,10 +16,10 @@
 // @import "%fb2k_path%skins\scripts\js\Common.js"
 // @import "%fb2k_path%skins\scripts\js\Console.js"
 // @import "%fb2k_path%skins\scripts\js\Cover.js"
-// @import "%fb2k_path%skins\scripts\js\Desktop.js"
+
 // @import "%fb2k_path%skins\scripts\js\Exhibition.js"
 // @import "%fb2k_path%skins\scripts\js\Explorer.js"
-// @import "%fb2k_path%skins\scripts\js\Function.js"
+
 // @import "%fb2k_path%skins\scripts\js\Group.js"
 // @import "%fb2k_path%skins\scripts\js\Home.js"
 // @import "%fb2k_path%skins\scripts\js\Http.js"
